@@ -15,9 +15,20 @@ public class Gif {
     @SerializedName("url")
     private String url;
 
+    @SerializedName("images")
+    private GifImage image;
+
     public Gif(String id, String url) {
         this.id = id;
         this.url = url;
+    }
+
+    public GifImage getImage() {
+        return image;
+    }
+
+    public void setImage(GifImage image) {
+        this.image = image;
     }
 
     public String getId() {

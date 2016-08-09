@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.hfad.giphyapi.R;
 import com.hfad.giphyapi.api_stuff.ApiInterface;
 import com.hfad.giphyapi.api_stuff.ApiClient;
+import com.hfad.giphyapi.model.FixedHeight;
 import com.hfad.giphyapi.model.Gif;
+import com.hfad.giphyapi.model.GifImage;
 import com.hfad.giphyapi.model.GifResponse;
 import com.koushikdutta.ion.Ion;
 
@@ -38,21 +40,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GifResponse> call, Response<GifResponse> response) {
                 int statusCode = response.code();
+
+                Log.i(TAG,"Response code is "+ statusCode);
+
                 List<Gif> gifs = response.body().getData();
 
-                String url = gifs.get(0).getUrl();
-                String id = gifs.get(0).getId();
+                GifImage gifImage = gifs.get(0).getImage();
+                FixedHeight fixy = gifImage.getFixed_height();
 
-                TextView texty = (TextView) findViewById(R.id.textView);
-                texty.setText(id);
+                String url = fixy.getUrl();
+
 
                 ImageView immy = (ImageView) findViewById(R.id.imageView);
 
                 Ion.with(immy)
                         .placeholder(R.color.colorAccent)
                         .error(R.color.colorPrimary)
-//                        .animateLoad(AnimationUtils.loadAnimation(DetailViewActivity.this, R.anim.rotator))
-//                        .animateIn(R.anim.fade_in_long)
                         .load(url);
 
                 Log.i(TAG,"URL is: "+url);
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GifResponse> call, Throwable t) {
                 Log.i(TAG,"onFailure for callback");
+                t.printStackTrace();
             }
         });
 

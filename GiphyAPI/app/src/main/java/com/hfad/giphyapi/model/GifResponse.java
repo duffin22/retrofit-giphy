@@ -13,6 +13,8 @@ public class GifResponse {
     @SerializedName("data")
     private List<Gif> data;
 
+
+
     public List<Gif> getData() {
         return data;
     }
