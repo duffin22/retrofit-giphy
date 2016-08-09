@@ -16,10 +16,31 @@
         android:contentDescription="@string/profile_image"/>
 
     <Button
+        android:id="@+id/choose_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get a normal image"
+        android:layout_above="@+id/choose_button3"/>
+
+    <Button
+        android:id="@+id/choose_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make a pixelated image"
+        android:layout_above="@+id/choose_button2"/>
+
+    <Button
+        android:id="@+id/choose_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make a greyscale image"
+        android:layout_above="@+id/choose_button"/>
+
+    <Button
         android:id="@+id/choose_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose picture to invert"
+        android:text="Invert an image"
         android:layout_alignParentBottom="true"/>
 
     <ProgressBar
