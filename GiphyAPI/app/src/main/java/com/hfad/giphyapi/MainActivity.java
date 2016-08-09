@@ -1,14 +1,18 @@
 package com.hfad.giphyapi;
 
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.hfad.giphyapi.R;
 import com.hfad.giphyapi.api_stuff.ApiInterface;
 import com.hfad.giphyapi.api_stuff.ApiClient;
 import com.hfad.giphyapi.model.Gif;
 import com.hfad.giphyapi.model.GifResponse;
+import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
@@ -36,7 +40,22 @@ public class MainActivity extends AppCompatActivity {
                 int statusCode = response.code();
                 List<Gif> gifs = response.body().getData();
 
-                Log.i(TAG,"onResponse for callback");
+                String url = gifs.get(0).getUrl();
+                String id = gifs.get(0).getId();
+
+                TextView texty = (TextView) findViewById(R.id.textView);
+                texty.setText(id);
+
+                ImageView immy = (ImageView) findViewById(R.id.imageView);
+
+                Ion.with(immy)
+                        .placeholder(R.color.colorAccent)
+                        .error(R.color.colorPrimary)
+//                        .animateLoad(AnimationUtils.loadAnimation(DetailViewActivity.this, R.anim.rotator))
+//                        .animateIn(R.anim.fade_in_long)
+                        .load(url);
+
+                Log.i(TAG,"URL is: "+url);
             }
 
             @Override
